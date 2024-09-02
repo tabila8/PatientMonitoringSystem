@@ -1,0 +1,42 @@
+{% extends 'patientMonitor/base.html' %}
+{% block body_block %}
+<meta http-equiv="refresh" content="10"/>
+<div class="text-center">
+  <h1 class="card-header bg-warning text-center">Cardiology Normal Monitoring</h1>
+  <a class="btn btn-primary mt-1" href="{% url 'patientMonitor:cardiology'%}">Monitor Emergency Patients</a>
+</div>
+
+{% for patient_registration in patient_list %}
+  {% if patient_registration.Department == "Cardiology" %}
+
+    {% for sensors in patient_registration.sensors_list.all %}
+      {% if forloop.last %}
+        {% if sensors.Temperature >= 99.86 and sensors.Temperature <= 95.54 or sensors.Pulse_Rate >= 90 and sensors.Pulse_Rate <= 60 or sensors.Oxygen_Saturation < 91.32 or sensors.call == "Yes" %}
+
+        {% else %}
+          <div class="d-sm-inline-flex col-2>">
+              <div class="card bg-info text-align-center my-1 ml-2" style="width: 283px;height:230px";>
+                <div class="card-body">
+                  Name: {{patient_registration.Patient_Name}}<br>
+                  Ward No: {{patient_registration.Ward_No}}<br>
+                  Room No: {{patient_registration.Room_No}}<br>
+                  Bed No: {{patient_registration.Bed_No}}<br>
+                  Temperature: {{sensors.Temperature}}<br>
+                  Pulse Rate: {{sensors.Pulse_Rate}}<br>
+                  Oxygen_Saturation: {{sensors.Oxygen_Saturation}}
+                </div>
+              <div class="m-auto">
+                <a class="btn btn-secondary btn-sm btn-danger" href="#">Emergency Call</a>
+                <a class="btn btn-secondary btn-sm btn-success" href="{% url 'patientMonitor:patient_details' pk=patient_registration.pk %}">More</a>
+                <a class="btn btn-secondary btn-sm btn-warning" href="{% url 'patientMonitor:ambulance_list' %}">Ambulance</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+  {% endif %}
+{% endfor %}
+
+{% endblock %}

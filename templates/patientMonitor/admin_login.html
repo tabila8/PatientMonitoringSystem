@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'patientMonitor/base.html' %}
+{% block body_block %}
+<h1 class="card-header bg-warning text-center">Login</h1>
+<div class="text-align-center d-flex justify-content-center">
+  <div class="card bg-light border-info mt-1" style="width: 283px;height:280px"; >
+    <div class="card-body">
+      <form action="{% url 'patientMonitor:admin_login' %}" method="POST" class="text-center">
+        <label for="username">Username</label><br>
+        <input type="text" name="username" placeholder="Enter Username" required><br>
+        <label for="password">Password</label><br>
+        <input type="password" name="password" placeholder="Enter Password" required><br>
+        {% csrf_token %}
+        <input class="mt-2 btn btn-primary text-center" type="submit" name="submit" value="Login">
+      </form>
+    </div>
+    <div class="card bg-secondary">
+      <div class="card-body m-auto">
+        <a class="btn btn-success" href="{% url 'patientMonitor:hospitalPersonnelRegister' %}">Create New Admin</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

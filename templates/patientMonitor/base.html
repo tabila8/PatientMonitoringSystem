@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/yourcode.js"></script>
+
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav m-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'patientMonitor:index' %}">Home</a>
+    </li>
+
+    {% if user.is_authenticated %}
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:patient_information' %}">Patients</a>
+    </li> -->
+    <li class="nav-item">
+      <div class="dropdown">
+        <button class="dropdown-toggle btn text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Monitoring Department
+        </button>
+        <div class="dropdown-menu bg-dark " aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:cardiology'%}">Cardiology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:neurology'%}">Neurology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:orthopaedics'%}">Orthopaedics</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:gynecology'%}">Gynecology</a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{% url 'patientMonitor:home_monitor' %}">Home Monitoring</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{% url 'patientMonitor:add_prescription' %}">Prescription</a>
+    </li>
+    <li class="nav-item">
+      <div class="dropdown">
+        <button class="dropdown-toggle btn text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Patients
+        </button>
+        <div class="dropdown-menu bg-dark " aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:p_cardiology'%}">Cardiology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:p_neurology'%}">Neurology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:p_orthopaedics'%}">Orthopaedics</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:p_gynecology'%}">Gynecology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:patient_information' %}">All Patients</a>
+        </div>
+      </div>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:patient_data_input' %}">Sensors</a>
+    </li> -->
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:doctor_list' %}">Doctors</a>
+    </li> -->
+    <li class="nav-item">
+      <div class="dropdown">
+        <button class="dropdown-toggle btn text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Doctors
+        </button>
+        <div class="dropdown-menu bg-dark " aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:d_cardiology'%}">Cardiology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:d_neurology'%}">Neurology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:d_orthopaedics'%}">Orthopaedics</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:d_gynecology'%}">Gynecology</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:doctor_list' %}">All Doctors</a>
+        </div>
+      </div>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:registration_form' %}">Registration</a>
+    </li> -->
+    <li class="nav-item">
+      <div class="dropdown">
+        <button class="dropdown-toggle btn text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Registration
+        </button>
+        <div class="dropdown-menu bg-dark " aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:patient_registration' %}">Patients Ragistration</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:doctor_registration' %}">Doctors Registration</a>
+          <a class="dropdown-item text-info" href="{% url 'patientMonitor:add_ambulance' %}">Ambulance</a>
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:admin_logout' %}">Logout</a>
+    </li>
+    {% else %}
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:patient_information' %}">Patients List</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:doctor_list' %}">Doctors List</a>
+    </li> -->
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{% url 'patientMonitor:ambulance_list' %}">Ambulance</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="{% url 'patientMonitor:hospitalPersonnelRegister' %}">Admin Registration</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'patientMonitor:admin_login_page' %}">Login</a>
+    </li>
+
+    {% endif %}
+  </ul>
+</nav>
+
+<div class="container-fluid">
+{% block body_block %}
+
+{% endblock %}
+</div>
+</body>
+</html>

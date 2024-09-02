@@ -1,0 +1,50 @@
+{% extends 'patientMonitor/base.html' %}
+{% block body_block %}
+<meta http-equiv="refresh" content="10"/>
+<div class="text-center">
+  <h1 class="card-header bg-warning text-center">Orthopaedics Emergency Monitoring</h1>
+  <a class="btn btn-primary mt-1" href="{% url 'patientMonitor:n_orthopaedics'%}">Monitor Normal Patients</a>
+</div>
+
+{% for patient_registration in patient_list %}
+  {% if patient_registration.Department == "Orthopaedics" and patient_registration.Monitoring == "Hospital" %}
+
+    {% for sensors in patient_registration.sensors_list.all %}
+      {% if forloop.last %}
+        {% if sensors.Temperature >= 99.86 and sensors.Temperature <= 95.54 or sensors.Pulse_Rate >= 90 and sensors.Pulse_Rate <= 60 or sensors.Oxygen_Saturation < 91.32 or sensors.call == "Yes" %}
+          <div class="d-sm-inline-flex col-2>">
+              <div class="card bg-info text-align-center my-1 ml-2" style="width: 283px;height:220px";>
+                <div class="card-body">
+                  Name: {{patient_registration.Patient_Name}}<br>
+                  Ward No: {{patient_registration.Ward_No}}<br>
+                  Room No: {{patient_registration.Room_No}}<br>
+                  Bed No: {{patient_registration.Bed_No}}<br>
+                  {% if sensors.Temperature > 98.4 or sensors.Temperature < 96 %}
+                    Temperature: {{sensors.Temperature}}<br>
+                  {% endif %}
+                  {% if sensors.Pulse_Rate > 90 or sensors.Pulse_Rate < 60 %}
+                    Pulse Rate: {{sensors.Pulse_Rate}}<br>
+                  {% endif %}
+                  {% if sensors.Oxygen_Saturation < 90 %}
+                    Oxygen Saturation: {{sensors.Oxygen_Saturation}}
+                  {% endif %}
+                  {% if sensors.call == "Yes" %}
+                    <p class="text-danger">Call For help</p>
+                  {% endif %}
+                </div>
+              <div class="m-auto">
+                <a class="btn btn-secondary btn-sm btn-danger" href="{% url 'patientMonitor:emergencyAlert' %}" target="_blank">Alert</a>
+                <a class="btn btn-secondary btn-sm btn-primary" href="{% url 'patientMonitor:mailsend'%}" target="_blank">Email</a>
+                <a class="btn btn-secondary btn-sm btn-warning" href="{% url 'patientMonitor:ambulance_list' %}">Ambulance</a>
+                <a class="btn btn-secondary btn-sm btn-success" href="{% url 'patientMonitor:patient_details' pk=patient_registration.pk %}" target="_blank">More</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+  {% endif %}
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'patientMonitor/base.html' %}
+{% block body_block %}
+<div class="card-header text-center bg-warning text-white"><h2>Avaiable Ambulance</h2></div>
+
+{% for ambulance in ambulance_list %}
+  {% if ambulance.Availability == True %}
+    <div class="d-sm-inline-flex col-2 mt-1">
+        <a class="btn btn-info" href="{% url 'patientMonitor:ambulance_details' pk=ambulance.pk %}">{{ambulance.Ambulance_No}}</a>
+    </div>
+  {% endif %}
+{% endfor %}
+{% endblock %}

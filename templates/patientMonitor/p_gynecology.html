@@ -1,0 +1,12 @@
+{% extends 'patientMonitor/base.html' %}
+{% block body_block %}
+<div class="card-header text-center bg-warning text-white"><h2>Gynecology Department</h2></div>
+
+{% for patient_registration in patient_list %}
+  {% if patient_registration.Department == "Gynecology" %}
+  <div class="d-sm-inline-flex col-2 mt-1">
+      <a class="btn btn-info" href="{% url 'patientMonitor:patient_details' pk=patient_registration.pk %}">{{patient_registration.Patient_Name}}</a>
+  </div>
+  {% endif %}
+{% endfor %}
+{% endblock %}

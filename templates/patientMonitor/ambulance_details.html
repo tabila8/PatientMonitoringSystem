@@ -1,0 +1,35 @@
+{% extends 'patientMonitor/base.html' %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+<div class="container-fluid m-auto">
+  <div class="card bg-light mt-3">
+    <div class="card-header text-center bg-success text-light"><h2>Ambulance Details</h2></div>
+    <div class="card-body">
+      <div class="card-header">
+        <p>Driver Name: {{ambulance.Driver_Name}}</p>
+      </div>
+      <div class="card-header">
+        <p>Contact No: {{ambulance.Contact_No}}</p>
+      </div>
+      <div class="card-header">
+        <p>Ambulance No: {{ambulance.Ambulance_No}}</p>
+      </div>
+      <div class="card-header">
+        <p>Hospital Name: {{ambulance.Hospital_Name}}</p>
+      </div>
+      <div class="card-header">
+        <p>Availability: {{ambulance.Availability}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <a class="text-center  btn btn-success my-3 " href="{% url 'patientMonitor:ambulance_booked' pk=ambulance.pk %}">Booked</a>
+  </div>
+</div>
+
+
+<div class="container m-auto text-center">
+  <a class="btn btn-secondary" href="{% url 'patientMonitor:ambulance_list' %}">Back</a>
+</div>
+
+{% endblock %}

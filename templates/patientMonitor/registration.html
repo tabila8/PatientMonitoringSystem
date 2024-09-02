@@ -1,0 +1,14 @@
+{% extends 'patientMonitor/base.html' %}
+
+{% block body_block %}
+<!-- <meta http-equiv="refresh" content="10"/> -->
+<h1 class="text-center card-header bg-warning">Registration</h1>
+
+
+<div class="container-fluid text-center mt-1">
+  <a class="btn btn-primary" href="{% url 'patientMonitor:patient_registration' %}">Patients Ragistration</a>
+  <a class="btn btn-primary" href="{% url 'patientMonitor:doctor_registration' %}">Doctors Registration</a>
+</div>
+
+
+{% endblock %}

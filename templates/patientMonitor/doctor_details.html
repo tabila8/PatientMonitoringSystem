@@ -1,0 +1,58 @@
+{% extends 'patientMonitor/base.html' %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+<div class="container-fluid m-auto">
+  <div class="card bg-light mt-3">
+    <div class="card-header text-center bg-success text-light"><h2>Doctor Details</h2></div>
+    <div class="card-body">
+      <div class="card-header">
+        <p>Doctor's Name: {{doctor_registration.Doctor_Name}}</p>
+      </div>
+      <div class="card-header">
+        <p>Designation: {{doctor_registration.Designation}}</p>
+      </div>
+      <div class="card-header">
+        <p>Department: {{doctor_registration.Department}}</p>
+      </div>
+      <div class="card-header">
+        <p>Hospital: {{doctor_registration.Hospital_Name}}</p>
+      </div>
+      <div class="card-header">
+        <p>Blood Grpup: {{doctor_registration.Blood_Group}}</p>
+      </div>
+      <div class="card-header">
+        <p>Contact Number: {{doctor_registration.Phone_No}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid m-auto">
+  <div class="card bg-light mt-3 mb-3">
+    <div class="card-header text-center bg-success text-light"><h2>Assigned Patients</h2></div>
+    <div class="card-body">
+      {% for patient_registration in doctor_registration.patient_list.all %}
+      <div class="card-header">
+          <a href="{% url 'patientMonitor:patient_details' pk=patient_registration.pk %}">{{patient_registration.Patient_Name}}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container-fluid m-auto">
+  <div class="card mt-3">
+    <div class="card-header">
+      <h2 class="text-center">Prescription</h2>
+    </div>
+    <a class="btn btn-primary btn-sm" href="{% url 'patientMonitor:add_prescription'%}"><h6 class="text-center">Prescribe</h6></a>
+  </div>
+</div> -->
+
+
+
+<div class="container m-auto text-center">
+  <a class="btn btn-secondary my-3" href="{% url 'patientMonitor:doctor_list' %}">Back</a>
+</div>
+
+{% endblock %}

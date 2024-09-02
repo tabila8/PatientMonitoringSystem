@@ -1,0 +1,14 @@
+{% extends 'patientMonitor/base.html' %}
+{% block body_block %}
+<div class="card-header text-center bg-success text-white"><h2>Doctors List</h2></div>
+<div class="container-fluid mt-1">
+  <div class="card bg-light mb-3">
+
+    <div class="card-body">
+        {% for doctor_registration in doctor_list %}
+          <li><a href="{% url 'patientMonitor:doctor_details' pk=doctor_registration.pk %}">{{doctor_registration.Doctor_Name}}</a></li>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

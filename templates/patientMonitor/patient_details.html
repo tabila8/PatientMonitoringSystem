@@ -1,0 +1,126 @@
+{% extends 'patientMonitor/base.html' %}
+{% block body_block %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <div class="m-auto">
+        <div class="card bg-light mt-3 mb-3">
+          <div class="card-header text-center bg-success text-light"><h2>Patient Details</h2></div>
+          <div class="card-body">
+            <div class="card-header">
+              <p>Patients's Name: {{patient_registration.Patient_Name}}</p>
+            </div>
+            <div class="card-header">
+              <p>Age: {{patient_registration.Age}}</p>
+            </div>
+            <div class="card-header">
+              <p>Sex: {{patient_registration.sex}}</p>
+            </div>
+            <div class="card-header">
+              <p>Blood Group: {{patient_registration.Blood_Group}}</p>
+            </div>
+            <div class="card-header">
+              <p>Weight: {{patient_registration.Weight}}</p>
+            </div>
+            <div class="card-header">
+              <p>Height: {{patient_registration.Height}}</p>
+            </div>
+            <div class="card-header">
+              <p>Ward No: {{patient_registration.Ward_No}}</p>
+            </div>
+            <div class="card-header">
+              <p>Room No: {{patient_registration.Room_No}}</p>
+            </div>
+            <div class="card-header">
+              <p>Bed No: {{patient_registration.Bed_No}}</p>
+            </div>
+            <div class="card-header">
+              <p>Contact Number: {{patient_registration.Phone_No}}</p>
+            </div>
+            <div class="card-header">
+              <p>Department: {{patient_registration.Department}}</p>
+            </div>
+            <div class="card-header">
+              <p>Monitored By: {{patient_registration.Monitoring}}</p>
+            </div>
+            <div class="card-header">
+              <p>Assigned Doctor: {{patient_registration.doctor}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card mt-3">
+        <div class="card-header bg-success">
+          <h2 class="text-center text-light ">Advice</h2>
+        </div>
+        <div class="card-body">
+          {% for prescription in patient_registration.patient_prescription.all %}
+            <div class="card-header">
+              <b><h6 class="text-success">Prescription:</h6></b><p>{{prescription.prescription}}</p>
+              <b><h6 class="text-primary">Doctor:</h6></b><p>{{prescription.Doctor}}</p>
+              <!-- <h6>User:</h6><p>{{prescription.user}}</p> -->
+              <b><h6 class="text-warning">Date & Time:</h6></b><p>{{prescription.prescription_date}}</p>
+            </div>
+            <!-- <h6>User:</h6><p>{{User.username}}</p> -->
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+            <div class="card bg-light mt-3 mb-3">
+              <div class="card-header text-center bg-primary text-light"><h6>Temperature</h6></div>
+              <div class="card-body">
+                {% for sensors in patient_registration.sensors_list.all %}
+                <div class="card-header text-center">
+                    {{sensors.Temperature}}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card bg-light mt-3 mb-3">
+              <div class="card-header text-center bg-primary text-light"><h6>Pulse Rate</h6></div>
+              <div class="card-body">
+                {% for sensors in patient_registration.sensors_list.all %}
+                <div class="card-header text-center">
+                    {{sensors.Pulse_Rate}}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="card bg-light mt-3 mb-3">
+              <div class="card-header text-center bg-primary text-light"><h6>Oxygen Saturation</h6></div>
+              <div class="card-body">
+                {% for sensors in patient_registration.sensors_list.all %}
+                <div class="card-header text-center">
+                    {{sensors.Oxygen_Saturation}}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="container text-center m-auto">
+  <a class="btn btn-secondary my-3" href="{% url 'patientMonitor:patient_information' %}">Back</a>
+</div>
+
+{% endblock %}

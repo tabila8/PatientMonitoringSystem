@@ -1,0 +1,17 @@
+{% extends 'patientMonitor/base.html' %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+<h1 class="text-center mt-3">Input Patient Data</h1>
+<div class="card bg-light mb-3">
+  <div class="card-header text-center bg-secondary text-white">Pulse</div>
+    <div class="card-body">
+      <form class="text-center"  method="POST">
+        {{form|crispy}}
+        {% csrf_token %}
+        <br>
+        <a class="btn btn-secondary" href="{% url 'patientMonitor:patient_data_input' %}">Back</a>
+        <input class="btn btn-success" type="submit" name="submit" value="Add Pulse">
+      </form>
+  </div>
+</div>
+{% endblock %}
